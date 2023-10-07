@@ -1,6 +1,9 @@
 # support status
 currently, code compiles and works with ``gcc 13.1.1`` (and associated ``glibc``) for ``amd64``.
 
+tested gcc versions:
+- ``13.2.1`` (amd64), runs natively
+
 tested gem5 host architectures:
 - ``aarch64``
 - ``amd64``
@@ -61,7 +64,7 @@ to accept command line arguments:
 
 for example, for the ``two_level.py`` configuration, i added the following line:
 ```python
-SimpleOpts.add_option("--bin-opts")
+SimpleOpts.add_option("--bin-opts",default="")
 ```
 under the other ``SimpleOpts.add_option`` for ``"binary"``. 
 
